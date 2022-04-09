@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
 /**
-* main - Entry point 
+* main - Write a C program that prints to the standard error.
 *
-* Return: Always 0 (Success)
+* Return: and that piece of art is useful" - Dora Korpar, 2015-10-19
 */
 int main(void)
 {
