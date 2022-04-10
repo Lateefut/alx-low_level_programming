@@ -1,18 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 /**
-* main - prints the numbers from 00 to 99.
-* Return: 0
+* main - Entry point
+*
+* Return: Always 0 (Success)
 */
 int main(void)
 {
-int a, j, k;
-for (a = 0; a < 100; a++)
+int d;
+for (d = 0; d < 100; d++)
 {
-j = a / 10;
-k = a % 10;
-putchar(j + '0');
-putchar(j + '0');
-if (a < 99)
+putchar((d / 10) + '0');
+putchar((d % 10) + '0');
+if (d != 99)
 {
 putchar(',');
 putchar(' ');
