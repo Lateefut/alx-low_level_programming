@@ -2,21 +2,24 @@
 /**
 * main - Entry point
 *
-* Return: Always 0 (Success)
+* Return: Always 0 (Success/completed)
 */
 int main(void)
 {
-int a, j, k;
-for (a = 0; a < 100; a++)
+int number_left;
+int number_right;
+for (number_left = 48; number_right <= 78; number_left++)
 {
-j = a / 10;
-k = a % 10;
-putchar(j + '0');
-putchar(j + '0');
-if (a < 99)
+for (number_right = number_left + 1 ; number_right <= 78; number_right++)
 {
+putchar(number_left);
+putchar (number_right);
+if ((number_left == 56) && (number_right == 78))
+{
+break;
+}
 putchar(',');
-putchar(' ');
+putchar (' ');
 }
 }
 putchar('\n');
