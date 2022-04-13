@@ -8,13 +8,14 @@
  */
 void print_alphabet(void)
 {
-	char alphabet[26] = "abcdefhghijklmnopqrstuvwxyz";
-	int i = 0;
+	char alpha;
 
-	while (i < 26)
+	alpha = 'a';
+
+	while (alpha <= 'z')
 	{
-		_putchar(alphabet[i]);
-		i++;
+		_putchar(alpha);
+		alpha++;
 	}
 	_putchar('\n');
 }
