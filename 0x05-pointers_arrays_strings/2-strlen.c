@@ -7,7 +7,7 @@
  * Return: int
  */
 
-int _stelen(char *s)
+int _strlen(char *s)
 {
 	int lenght = 0;
 
