@@ -11,7 +11,7 @@ int sizeit(char *a);
 
 void rev_string(char *s)
 {
-	int lenght = sizeit(s);
+	int length = sizeit(s);
 	char string[500];
 	int str_point, end_point, tmp_arr;
 
