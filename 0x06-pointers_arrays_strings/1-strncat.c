@@ -3,9 +3,9 @@
 /**
  * _strncat - function that concatenates n bytes of string two strings.
  *
- * @dest: The destination string to append in 
+ * @dest: The destination string to append in
  * @src: The string to append
- * @n: bytes to pass 
+ * @n: bytes to pass
  * Return: concatenated n bytes to string
  */
 
