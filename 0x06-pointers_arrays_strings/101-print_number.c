@@ -19,7 +19,8 @@ void print_number(int n)
 			positive = n * -1;
 			_putchar('-');
 		}
-		while (t_beg <= positve)
+
+		while (t_beg <= positive)
 			t_beg *= 10;
 		tens = t_beg / 10;
 
@@ -32,3 +33,4 @@ void print_number(int n)
 		}
 	}
 }
+
