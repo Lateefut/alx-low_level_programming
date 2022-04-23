@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * string toupper - changes all lowecase letters of a string to uppercase.
+ * string_toupper - changes all lowecase letters of a string to uppercase.
  *
  * @s: characters
  * Return: characters to uppercase
@@ -13,7 +13,7 @@ char *string_toupper(char *s)
 
 	while (*(s + i) != '\0')
 	{
-		if (*(s+i) >= 'a' && *(s + i) <= 'z')
+		if (*(s + i) >= 'a' && *(s + i) <= 'z')
 			*(s + i) -= 32;
 		i++;
 
