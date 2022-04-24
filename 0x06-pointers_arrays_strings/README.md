@@ -1,1 +1,1 @@
-Readme 2 for pointers, arrays and strings continued.
+Readme 2 for pointers, arrays and strings continued..
