@@ -1,104 +1,130 @@
-#include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
- * strtow - splits a string into words
- * @str: string of words to be split
- * Return: double pointer to strings
+ * count_height - count height of the string matrix
+ * @str: input string
+ * Return: interger
+ */
+int count_height(char *str)
+{
+	int c_y = 0, c_x = 0, count = 0;
+
+	while (str[count] != '\0')
+	{
+		if (str[count] == ' ')
+		{
+			if (c_x > 0)
+				c_y++;
+			c_x = 0;
+		}
+		else
+		{
+			c_x++;
+		}
+		count++;
+	}
+	if (c_x > 0)
+		c_y++;
+	return (c_y);
+}
+/**
+ * check_last - check for the last space needed to be allocated
+ * @s: input of arguments
+ * @c_x: input int size of row
+ * @c: input int count of row
+ * Return: pointer to pointer
+ */
+char **check_last(char **s, int c_x, int c)
+{
+	if (c_x > 0)
+	{
+		c_x++;
+		s[c] = malloc(sizeof(char) * c_x);
+		if (s[c] == NULL)
+		{
+			while (c >= 0)
+			{
+				free(s[c]);
+				c--;
+			}
+			free(s);
+			return (NULL);
+		}
+		c++;
+	}
+	return (s);
+
+}
+/**
+ * assign - assign the values
+ * @str: count arguments
+ * @s: input of arguments
+ * Return: pointer to pointer
+ */
+char **assign(char *str, char **s)
+{
+	int counter = 0, c1 = 0, c2 = 0;
+
+	while (str[counter] != '\0')
+	{
+		if (str[counter] == ' ')
+		{
+			if (c2 > 0)
+				c1++;
+			c2 = 0;
+		}
+		else
+		{
+			s[c1][c2] = str[counter];
+			c2++;
+		}
+		counter++;
+	}
+	return (s);
+}
+/**
+ * strtow - store string in matrix
+ * @str: input string
+ * Return: matrix or null
  */
 char **strtow(char *str)
 {
-	char **ptr;
-	int i, k, len, start, end, j = 0;
-	int words =  countWords(str);
+	char **s;
+	int c_y, c_x = 0, c = 0, count = 0;
 
-	if (!str || !countWords(str))
+	if (str == NULL)
 		return (NULL);
-	ptr = malloc(sizeof(char *) * (words + 1));
-	if (!ptr)
+	c_y = count_height(str) + 1;
+	if (c_y == 1)
 		return (NULL);
-	for (i = 0; i < words; i++)
+	s = malloc(sizeof(char *) * c_y);
+	while (str[count] != '\0')
 	{
-		start = startIndex(str, j);
-		end = endIndex(str, start);
-		len = end - start;
-		ptr[i] = malloc(sizeof(char) * (len + 1));
-		if (!ptr[i])
+		if (str[count] == ' ')
 		{
-			i -= 1;
-			while (i >= 0)
+			if (c_x > 0)
 			{
-				free(ptr[i]);
-					i--;
+				c_x++;
+				s[c] = malloc(sizeof(char) * c_x);
+				if (s[c] == NULL)
+				{
+					while (c >= 0)
+					{
+						free(s[c]);
+						c--;
+					}
+					free(s);
+					return (NULL);
+				}
+				c++;
 			}
-			free(ptr);
-			return (NULL);
+			c_x = 0;
 		}
-		for (k = 0; k < len; k++)
-			ptr[i][k] = str[start++];
-		ptr[i][k++] = '\0';
-		j = end + 1;
+		else
+			c_x++;
+		count++;
 	}
-	ptr[i] = NULL;
-	return (ptr);
-}
-
-/**
- * isSpace - determines if character is a space or not
- * @c: input char
- * Return: 1 if true or 0 or not
- */
-int isSpace(char c)
-{
-	return (c == ' ');
-}
-
-/**
- * startIndex - returns first index of non-space char
- * @s: input string
- * @index: starting index
- * Return: index of first non-space char
- */
-int startIndex(char *s, int index)
-{
-
-	while (isSpace(*(s + index)))
-		index++;
-	return (index);
-}
-
-/**
- * endIndex - returns last index of non-space char
- * @s: input string
- * @index: starting index
- * Return: index of last index of non-space char
- */
-int endIndex(char *s, int index)
-{
-	while (!isSpace(*(s + index)))
-		index++;
-	return (index);
-}
-
-/**
- * countWords - counts numbers of words in string
- * @s: input string
- * Return: number of words
- */
-int countWords(char *s)
-{
-	int wordOn = 0;
-	int words = 0;
-
-	while (*s)
-	{
-		if (isSpace(*s) && wordOn)
-			wordOn = 0;
-		else if (!isSpace(*s) && !wordOn)
-		{
-			wordOn = 1;
-			words++;
-		}
-		s++;
-	}
-	return (words);
+	s = check_last(s, c_x, c);
+	return (assign(str, s));
 }
