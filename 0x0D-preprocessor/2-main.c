@@ -6,11 +6,11 @@
  *
  * Return: Always 0.
  */
-int main (void)
+int main(void)
 {
 	char *res;
 
 	res = __FILE__;
-	printf(%s\n", res);
+	printf("%s\n", res);
 	return (0);
 }
