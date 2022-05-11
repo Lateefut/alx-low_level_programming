@@ -1,83 +1,48 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "dog.h"
-
+#include <stdlib.h>
 /**
- * len - find length of string
- * @str: string
- * Return: length
+ * new_dog - a function that creates a new dog.
+ * @name: dog name
+ * @age: dog age
+ * @owner: dog owner
+ *
+ * Return: Return NULL if the function fails.
  */
-int len(char *str)
-{
-	int i;
 
-	for (i = 0; *(str + i); i++)
-		;
-	return (i);
-}
-/**
- * strcpy - copies the string pointed to by src,
- * including the terminating null byte (\0),
- * to the buffer pointed to by dest
- * @dest: copy source to this buffer
- * @src: this is the source to copy
- * Return: copy of original source
- */
-char *strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; i <= len(src); i++)
-		dest[i] = src[i];
-	return (dest);
-}
-/**
- * new_dog - create new instance of struct dog
- * @name: member
- * @age: member
- * @owner: member
- * Return: initialized instance of struct dog
- */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *dog1;
-	char *copy_of_name;
-	char *copy_of_owner;
+	struct dog *_dog;
+	int i, j, k9;
+	char *name_cpy, *owner_cpy;
 
-	dog1 = malloc(sizeof(dog_t)); /* validate if dog1 initiated correctly */
-	if (dog1 == NULL)
+	_dog = malloc(sizeof(struct dog));
+	if (_dog == NULL)
 		return (NULL);
-
-	dog1->age = age;
-
-	/* make copies of struct members and validate, else free on error */
-	/* set values of struct members to copies of arguments or set to NULL */
-	if (name != NULL)
+	i = 0;
+	while (name[i] != '\0')
+		i++;
+	j = 0;
+	while (owner[j] != '\0')
+		j++;
+	name_cpy = malloc(sizeof(char) * i + 1);
+	if (name_cpy == NULL)
 	{
-		copy_of_name = malloc(len(name) + 1);
-		if (copy_of_name == NULL)
-		{
-			free(dog1);
-			return (NULL);
-		}
-		dog1->name = strcpy(copy_of_name, name);
+		free(_dog);
+		return (NULL);
 	}
-	else
-		dog1->name = NULL;
-
-	if (owner != NULL)
+	owner_cpy = malloc(sizeof(char) * j + 1);
+	if (owner_cpy == NULL)
 	{
-		copy_of_owner = malloc(len(owner) + 1);
-		if (copy_of_owner == NULL)
-		{
-			free(copy_of_name);
-			free(dog1);
-			return (NULL);
-		}
-		dog1->owner = strcpy(copy_of_owner, owner);
+		free(name_cpy);
+		free(_dog);
+		return (NULL);
 	}
-	else
-		dog1->owner = NULL;
-
-	return (dog1);
+	for (k9 = 0; k9 <= i; k9++)
+		name_cpy[k9] = name[k9];
+	for (k9 = 0; k9 <= j; k9++)
+		owner_cpy[k9] = owner[k9];
+	_dog->name = name_cpy;
+	_dog->age = age;
+	_dog->owner = owner_cpy;
+	return (_dog);
 }
