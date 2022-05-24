@@ -10,14 +10,14 @@ int _strlen(const char *str)
 {
 	int len;
 
-	for (len = 0; str[len] != '\0'; len ++)
+	for (len = 0; str[len] != '\0'; len++)
 		;
 	return (len);
 }
 
 /**
  * add_node_end - add node to end of linked list
- * @head: linked list 
+ * @head: linked list
  * @str: data for new node
  * Return: address of new element, or NULL if failed
  */
