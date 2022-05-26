@@ -1,8 +1,3 @@
-/*
- * File: 7-get_nodeint.c
- * Auth: Gedeon Obae Gekonge
- */
-
 #include "lists.h"
 
 /**
