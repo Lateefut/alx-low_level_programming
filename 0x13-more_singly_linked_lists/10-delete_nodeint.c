@@ -2,7 +2,7 @@
 
 /**
  * delete_nodeint_at_index - Write a function that deletes a node at a
- * given position.
+ * given positio
  * @head: head of the linked list
  * @index: index where the new node should be added. Index starts at 0
  * Return: 1 if it succeeded, -1 if it failed.
