@@ -21,12 +21,12 @@ void free_listint2(listint_t **head)
 	{
 		/* move the list */
 		result = result->next;
-
+		/* free it */
 		free(*head);
 
-		/* the new head is the next node */
+		/* the new head if the next node */
 		*head = result;
 	}
-	
+
 	*head = NULL;
 }
