@@ -19,7 +19,7 @@ char *create_buffer(char *file)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", file);
-		exit (99);
+		exit(99);
 	}
 
 	return (buffer);
@@ -54,7 +54,7 @@ void close_file(int fd)
  * if file_to cannot be created or written to - exit code 99.
  * if file_to or file_from cannot be closed - exit code 100.
  */
-int main (argc, char *argv[])
+int main (int argc, char *argv[])
 {
 	int from, to, r, w;
 	char *buffer;
@@ -76,7 +76,7 @@ int main (argc, char *argv[])
 			dprintf(STDERR_FILENO,
 					"Error: Can't read from file %s\n", argv[1]);
 			free(buffer);
-			exit (98);
+			exit(98);
 		}
 
 		w = write(to, buffer, r);
