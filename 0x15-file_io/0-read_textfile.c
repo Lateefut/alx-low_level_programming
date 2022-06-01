@@ -1,49 +1,49 @@
 #include "main.h"
 
 /**
- * read_textfile - read a certain size and prints to std output
- * @filename: file to read from
- * @letters: size to read
- * Return: actual size read and printed
+ * read_textfile - reads a text file and prints it to standard output
+ * @filename: relative or absolute path of the file
+ * @letters: number of letters to read and print
+ *
+ * Return: total number of chars printed.
  */
 
-ssize_t read_textfile(const char *filename, ssize_t letters)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd; /*file descriptor*/
-	ssize_t n_read, n_wrote;
-	char *buffer;
+	char *to_print;
+	ssize_t rd, wt;
+	int file;
 
 	if (filename == NULL)
 		return (0);
-
-	/*open*/
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	to_print = malloc(sizeof(char) * letters);
+	if (to_print == NULL)
 		return (0);
-
-	/*malloc buffer*/
-	buffer = malloc(sizeof(char) * letters);
-	if (buffer == NULL)
-		return (0);
-
-	/*read*/
-	n_read = read(fd, buffer, letters);
-	if (n_read == -1)
+	file = open(filename, O_RDONLY);
+	if (file < 0)
 	{
-		free(buffer);
-		close(fd);
+		free(to_print);
 		return (0);
 	}
-
-	/*write*/
-	n_wrote = write(STDOUT_FILENO, buffer, n_read);
-	if (n_wrote == -1)
+	rd = read(file, to_print, letters);
+	if (rd < 0)
 	{
-		free(buffer);
-		close(fd);
+		free(to_print);
 		return (0);
 	}
-
-	close(fd);
-	return (n_read);
+	if (rd > 0)
+		wt = write(STDOUT_FILENO, to_print, rd);
+	if (wt < rd)
+	{
+		free(to_print);
+		return (0);
+	}
+	wt = close(file);
+	if (wt < 0)
+	{
+		free(to_print);
+		return (0);
+	}
+	free(to_print);
+	return (rd);
 }
